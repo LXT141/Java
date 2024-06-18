@@ -57,6 +57,19 @@ const regist = async () => {
 //绑定数据，复用注册表单的数据模型
 //表单数据校验
 //登录函数
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+function login1() {
+    //跳转首页 路由完成跳转
+    ElMessage({
+        type: 'success',
+        message: '登录成功',
+        showClose:true
+    })
+    router.push('/')
+}
+
 const login = async() => {
     //调用接口，完成登录
     let result = await userLoginService(registerData.value);
@@ -67,7 +80,9 @@ const login = async() => {
         //失败了
         alert('注册失败')
     } */
-   ElMessage.success(result.msg ? result.msg : '登录成功') 
+    ElMessage.success(result.msg ? result.msg : '登录成功') 
+    //跳转首页 路由完成跳转
+   router.push('/')
 }
 
 //定义函数，清空数据模型的数据
@@ -116,7 +131,7 @@ const cleanRegistData = () => {
                     <el-input size="medium" type="password" :prefix-icon="Lock" show-password placeholder="请输入密码" v-model="registerData.password"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button class="button" type="primary" size="small" @click="login">登录</el-button>
+                    <el-button class="button" type="primary" size="small" @click="login1">登录</el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-link class="back" type="info" underline="false" @click="enroll = true;cleanRegistData()">

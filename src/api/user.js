@@ -8,7 +8,7 @@ export const userRegisterSeriice = (registerData) => {
     for (let key in registerData) {
         params.append(key, registerData[key]);
     }
-    return request.post('/user/register', params);
+    return request.post('/register', params);
 }
 
 //提供调用登录
@@ -17,5 +17,14 @@ export const userLoginService = (loginData) => {
     for (let key in loginData) {
         params.append(key, registerData[key]);
     }
-    return request.post('/user/login', loginData[key])
+    return request.post('/login', loginData[key]).then(response => {
+        const token = response.data.token;
+        localStorage.setItem('token', token)
+    })
+}
+
+//退出登录
+export const userLogoutService = () => {
+    localStorage.removeItem('token');
+
 }
