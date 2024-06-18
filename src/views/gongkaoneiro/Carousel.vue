@@ -28,9 +28,10 @@ function next() {
 <template>
     <el-container class="main-bgc">
             <div  class="main-img">
-                 <img v-if="activity==1" src="D:\code\JavaEEwork\vue\src\assets\images\1.jpg" alt="" >
-                <img v-if="activity==2" src="D:\code\JavaEEwork\vue\src\assets\images\2.jpg" alt="" >
-                <img v-if="activity==3" src="D:\code\JavaEEwork\vue\src\assets\images\3.jpg" alt="" >
+                 <img v-if="activity==1" src="../../assets/images/1.jpg" alt="" >
+                <img v-if="activity==2" src="../../assets/images/2.jpg" alt="" >
+                <img v-if="activity==3" src="../../assets/images/3.jpg" alt="" >
+                <img src="" alt="">
                 <el-icon style="position: absolute; top: 55%; left: 0;" size="35px" color="white" @click="prev"><ArrowLeft /></el-icon>
                 <el-icon style="position: absolute; top: 55%; right:0;" size="35px" color="white" @click="next"><ArrowRight /></el-icon>
             </div>

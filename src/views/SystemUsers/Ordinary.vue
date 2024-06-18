@@ -3,28 +3,28 @@ import { Edit, Delete } from '@element-plus/icons-vue'
 import { ref } from 'vue';
 const categorys = ref([
     {
-        "name": "czz",
+        "id": "czz",
         "user": "czz",
         "usergroup": "普通用户",
         "tel": 12345678901,
         "email":"256631951@qq.com"
     },
      {
-        "name": "ljh",
+        "id": "ljh",
         "user": "ljh",
         "usergroup": "普通用户",
         "tel": 12345678901,
         "email":"256631951@qq.com"
     },
      {
-        "name": "lxt",
+        "id": "lxt",
         "user": "lxt",
         "usergroup": "普通用户",
         "tel": 12345678901,
         "email":"256631951@qq.com"
     },
      {
-        "name": "gzp",
+        "id": "gzp",
         "user": "gzp",
         "usergroup": "普通用户",
         "tel": 12345678901,
@@ -44,7 +44,7 @@ const categorys = ref([
             </div>
         </template>
         <el-table :data="categorys" style="width: 100%;">
-            <el-table-column label="昵称" width="200" type="index" prop="name"></el-table-column>
+            <el-table-column label="ID" width="200" type="index" prop="id"></el-table-column>
             <el-table-column label="用户名" width="200" prop="user"></el-table-column>
             <el-table-column label="用户组" width="200" prop="usergroup"></el-table-column>
             <el-table-column label="手机号码" width="200" prop="tel"></el-table-column>
