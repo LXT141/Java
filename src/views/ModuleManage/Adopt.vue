@@ -1,16 +1,17 @@
 <script setup>
-import { Edit, Delete } from '@element-plus/icons-vue'
-import { ref } from 'vue';
+import { ref,inject } from 'vue';
 const categorys = ref([
     {
         "user": "kjj",
-        "name": "lhq",
+        "name": "kjj",
         "animalName":"狗子",
         "tel": 12341123441,
         "adopt": "aaa",
         "state":"是"
     }
 ])
+// const isAdmin = ref()
+const role = inject('role')
 </script>
 
 <template>
@@ -27,11 +28,11 @@ const categorys = ref([
                     <el-form-item label="动物名称" style="width: 300px;">
                         <el-input></el-input>
                     </el-form-item>
-                    <el-form-item style="width: 300px; margin-left: 80px">
-                        <el-button type="primary">查询</el-button>
-                        <el-button type="primary">重置</el-button>
-                        <el-button type="primary">添加</el-button>
-                        <el-button type="primary">删除</el-button>
+                    <el-form-item style="width: 300px; margin-left: 50px">
+                        <el-button type="primary" >查询</el-button>
+                        <el-button type="primary" v-if="isAdmin" >重置</el-button>
+                        <el-button type="primary" v-if="isAdmin">添加</el-button>
+                        <el-button type="primary" v-if="isAdmin">删除</el-button>
                     </el-form-item>
                 </el-form> 
             </div>
@@ -43,7 +44,7 @@ const categorys = ref([
             <el-table-column label="动物名称" width="180" prop="animalName"></el-table-column>
             <el-table-column label="领养备注" width="180" prop="adopt"></el-table-column>
             <el-table-column label="审核状态" width="180" prop="state"></el-table-column>
-            <el-table-column label="操作" width="180">
+            <el-table-column label="操作" width="">
                 <template #default="">
                     <el-button circle plain type="primary">详细</el-button>
                 </template>
@@ -54,7 +55,6 @@ const categorys = ref([
         </el-table>
     </el-card>
 </template>
-
 <style scoped>
 
 .extra{

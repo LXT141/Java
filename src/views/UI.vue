@@ -53,14 +53,8 @@ function exit() {
                         <!-- 公告内容 -->
                         <el-sub-menu index="1">
                             <template #title><p style="color: white;">公告内容</p></template>
-                            <el-menu-item class="bgc" index="/gk/adminCarousel" style="color: white;">轮播图</el-menu-item>
-                            <el-menu-item class="bgc" index="/gk/adminNotice" style="color: white;">公告栏</el-menu-item>
-                        </el-sub-menu>
-                        <!-- 系统用户 -->
-                        <el-sub-menu index="2">
-                            <template #title ><p style="color: white;">系统用户</p></template>
-                            <el-menu-item class="bgc" index="/systemUsers/adminManage" style="color: white;">管理员</el-menu-item>
-                            <el-menu-item class="bgc" index="/systemUsers/adminOrdinary" style="color: white;">普通用户</el-menu-item>
+                            <el-menu-item class="bgc" index="/gk/carousel" style="color: white;">轮播图</el-menu-item>
+                            <el-menu-item class="bgc" index="/gk/notice" style="color: white;">公告栏</el-menu-item>
                         </el-sub-menu>
                         <!-- 内容模块 -->
                         <el-sub-menu index="3">
@@ -73,8 +67,8 @@ function exit() {
                         <!-- 模块管理 -->
                          <el-sub-menu index="4">
                             <template #title ><p style="color: white;">模块管理</p></template>
-                            <el-menu-item class="bgc" index="/ModuleManage/adminAnimalNews" style="color: white;">流浪动物消息</el-menu-item>
-                            <el-menu-item class="bgc" index="/ModuleManage/adminAdopt" style="color: white;">领养消息</el-menu-item>
+                            <el-menu-item class="bgc" index="/ModuleManage/animalNews" style="color: white;">流浪动物消息</el-menu-item>
+                            <el-menu-item class="bgc" index="/ModuleManage/adopt" style="color: white;">领养消息</el-menu-item>
                             <el-menu-item class="bgc" index="4-3" style="color: white;">救助站信息</el-menu-item>
                             <el-menu-item class="bgc" index="4-4" style="color: white;">爱心募捐</el-menu-item>
                             <el-menu-item class="bgc" index="4-5" style="color: white;">加入志愿者</el-menu-item>
@@ -82,15 +76,15 @@ function exit() {
                         <!-- 个人中心 -->
                         <el-sub-menu index="5">
                             <template #title ><span style="color: white;">个人中心</span></template>
-                            <el-menu-item class="bgc" index="/user/adminInfo" style="color: white;">
+                            <el-menu-item class="bgc" index="/user/info" style="color: white;">
                                 <el-icon><User/></el-icon>
                                 <span>基本资料</span>
                             </el-menu-item>
-                            <el-menu-item class="bgc" index="/user/adminAvatar" style="color: white;">
+                            <el-menu-item class="bgc" index="/user/avatar" style="color: white;">
                                 <el-icon><Crop/></el-icon>
                                 <span>更换头像</span>
                             </el-menu-item>
-                            <el-menu-item class="bgc" index="/user/adminReset" style="color: white;">
+                            <el-menu-item class="bgc" index="/user/reset" style="color: white;">
                                 <el-icon><EditPen/></el-icon>
                                 <span>重置密码</span>
                             </el-menu-item>

@@ -1,6 +1,6 @@
 <script setup>
 import { User, Lock,Phone } from '@element-plus/icons-vue'
-import { ref } from 'vue'
+import { ref,provide } from 'vue'
 import { ElMessage } from 'element-plus';
 //控制注册与登录界面的显示
 const enroll = ref(false);
@@ -11,7 +11,7 @@ const registerData = ref({
     rePassword: '',
 })
 //校验密码的函数  rule是规则 value是值 callback是回调函数 
-const checkRePassword = (rule, value, callback ) => {
+const checkRePassword = ( value, callback ) => {
     if (value === '') {
         callback(new Error('请再次输入密码'))
     }
@@ -60,16 +60,39 @@ const regist = async () => {
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
+const role = ref()
 function login1() {
-    //跳转首页 路由完成跳转
-    ElMessage({
-        type: 'success',
-        message: '登录成功',
-        showClose:true
-    })
-    router.push('/')
+    if (selectedUserType.value == 'User') {
+        //跳转首页 路由完成跳转
+        ElMessage({
+            type: 'success',
+            message: '登录成功',
+            showClose: true
+        })
+        //身份为用户
+        role.value = "user"
+        provide(role)
+        //进入用户界面
+         router.push('/uI')
+    }
+    else if (selectedUserType.value == 'admin') {
+        //跳转首页 路由完成跳转
+        ElMessage({
+            type: 'success',
+            message: '登录成功',
+            showClose: true
+        })
+        //进入管理员界面
+         router.push('/')
+    }
+     else {
+        ElMessage({
+            type: 'warning',  
+            message: '请选择一个用户类型！',  
+            showClose: true  
+        })
+    }
 }
-
 const login = async() => {
     //调用接口，完成登录
     let result = await userLoginService(registerData.value);
@@ -93,6 +116,9 @@ const cleanRegistData = () => {
         rePassword: '',
     }
 }
+//定义存储用户类型
+const selectedUserType = ref("User","admin")
+const radio2 = ref('1')
 </script>
 <template>
     <div class="login-page">
@@ -102,13 +128,19 @@ const cleanRegistData = () => {
                <!-- 注册表单 -->
             <el-form ref="form" size="large" autocomplete="off" :model="registerData" :rules="rules">
                 <el-form-item prop="username">
-                    <el-input class="input" size="medium" :prefix-icon="User" placeholder="请输入用户名" v-model="registerData.username"></el-input>
+                    <el-input  size="medium" :prefix-icon="User" placeholder="请输入用户名" v-model="registerData.username"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
                     <el-input class="input" size="medium" type="password" show-password :prefix-icon="Lock" placeholder="请输入密码" v-model="registerData.password"></el-input>
                 </el-form-item>
                 <el-form-item prop="rePassword">
-                    <el-input  size="medium" type="password" :prefix-icon="Lock" show-password placeholder="请再次输入密码" v-model="registerData.rePassword"></el-input>
+                    <el-input class="input" size="medium" type="password" :prefix-icon="Lock" show-password placeholder="请再次输入密码" v-model="registerData.rePassword"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-radio-group v-model="radio2" style="margin-top: 10px">
+                        <el-radio value="1" size="large" class="ml-4">普通用户</el-radio>
+                        <el-radio value="3" size="large" class="ml-4">管理员</el-radio>
+                    </el-radio-group>
                 </el-form-item>
                 <el-form-item>
                     <el-button class="button" type="warning" size="small" @click="register">注册</el-button>
@@ -125,10 +157,16 @@ const cleanRegistData = () => {
             <h1 style="margin: 20px 0; text-align: center; font-size: 24px; font-weight: normal;">登录</h1>
             <el-form ref="form" size="large" autocomplete="off" :model="registerData" :rules="rules">
                 <el-form-item prop="username"> 
-                    <el-input class="input" size="medium" :prefix-icon="User" placeholder="请输入用户名" v-model="registerData.username"></el-input>
+                    <el-input  size="medium" :prefix-icon="User" placeholder="请输入用户名" v-model="registerData.username"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input size="medium" type="password" :prefix-icon="Lock" show-password placeholder="请输入密码" v-model="registerData.password"></el-input>
+                    <el-input class="input" size="medium" type="password" :prefix-icon="Lock" show-password placeholder="请输入密码" v-model="registerData.password"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-radio-group v-model="selectedUserType" style="margin-top: 10px;">
+                        <el-radio value="User" size="large" class="ml-4">普通用户</el-radio>
+                        <el-radio value="admin" size="large" class="ml-4">管理员</el-radio>
+                    </el-radio-group>
                 </el-form-item>
                 <el-form-item>
                     <el-button class="button" type="primary" size="small" @click="login1">登录</el-button>
@@ -159,7 +197,7 @@ const cleanRegistData = () => {
 }
 .login{
     margin: 200px auto;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
     width: 350px; 
     height: 300px; 
     padding: 20px; 
@@ -167,14 +205,14 @@ const cleanRegistData = () => {
 }
 .login-enroll{
     margin: 200px auto;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
     width: 350px; 
-    height: 300px; 
+    height: 350px; 
     padding: 20px; 
     border-radius: 10px;
 }
 .input{
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 .button{
     font-size: 16px;
@@ -185,5 +223,9 @@ const cleanRegistData = () => {
 }
 .back{
     color: rgb(27, 27, 28);
+}
+.ml-4{
+    padding-left: 10px;
+    color: #0c0c0c;
 }
 </style>
